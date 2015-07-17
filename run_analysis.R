@@ -25,8 +25,8 @@ train.subj = read.uci('train', 'subject_train.txt')
 train.x = read.uci('train', 'X_train.txt')
 train.y = read.uci('train', 'y_train.txt')
 
-test.subj = read.uci('test',' subject_train.txt')
-test.x = read.uci('test', 'X_train.txt')
-test.y = read.uci('test', 'y_train.txt')
+test.subj = read.uci('test','subject_test.txt')
+test.x = read.uci('test', 'X_test.txt')
+test.y = read.uci('test', 'y_test.txt')
 
 
