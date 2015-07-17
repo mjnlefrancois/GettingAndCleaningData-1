@@ -15,20 +15,20 @@ merge.uci <- function(type = c('test', 'train')) {
 	x <- read.uci(type, paste0('X_', type, '.txt')) # big table with values
 	y <- read.uci(type, paste0('y_', type, '.txt')) # activity / what
 
-	x <- mutate(x, subj=subj$V1, activity=y$V1)	
+	cbind(x, data.frame(subject=subj$V1, activity = y$V1))
 }
 
 # download and unzip the dataset
 if (!(file.exists(subdir))) {
 	url <- 'https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip'
 	f <- 'dataset.zip'
-	download.file(url, f, method='curl')
+	download.file(url, f, method='libcurl')
 	unzip(f)
 	unlink(f)
 }
 
 # merge training and test sets
 
-train <- merge.uci('train')
-test <- merge.uci('test')
+data <- merge.uci('train')
+rbind(data, merge.uci('test'))
 
