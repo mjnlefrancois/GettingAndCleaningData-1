@@ -9,6 +9,12 @@ read.uci <- function(type, fname) {
 	read.table(f)
 }
 
+# convenience function for reading feature label file
+read.labels <- function() {
+	f <- paste('.', subdir, 'features.txt', sep='/')
+	read.table(f)
+}
+
 # convenience function for merging sets
 merge.uci <- function(type = c('test', 'train')) {
 	subj <- read.uci(type, paste0('subject_', type, '.txt')) # who
@@ -28,7 +34,12 @@ if (!(file.exists(subdir))) {
 }
 
 # merge training and test sets
-
 data <- merge.uci('train')
 rbind(data, merge.uci('test'))
 
+# read feature labels 
+labels <- read.labels()
+
+# only keep the variables / columns we're interested in
+keep <- labels[grep('mean|std', labels$V2),]
+keep$V1 <- paste0('V', keep$V1)
