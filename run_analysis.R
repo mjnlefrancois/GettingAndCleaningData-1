@@ -35,7 +35,7 @@ if (!(file.exists(subdir))) {
 
 # merge training and test sets
 data <- merge.uci('train')
-rbind(data, merge.uci('test'))
+data <- rbind(data, merge.uci('test'))
 
 # read feature labels
 features <- read.labels('features.txt')
@@ -45,7 +45,17 @@ keep <- features[grep('mean|std', features$V2),]
 keep$V1 <- paste0('V', keep$V1)
 tidy <- data[, c(keep$V1, 'subject', 'activity')]
 
-# merge the tidy set with the activities table and only keep the names
+# rename the feature column names (look up values in 'keep')
+setnames(tidy, colnames(tidy), c(as.character(keep$V2), 'subject', 'activity'))
+
+# read activity labels
+activities <- read.labels('activity_labels.txt')
+setnames(activities, 'V2', 'activity_name')
+
+# rename the activity column names (merge with activity and drop number)
 tidy <- merge(tidy, activities, by.x="activity", by.y="V1")
 tidy$activity <- NULL
+
+# aggregate by subject and activity_name
+res <- aggregate(. ~ subject + activity_name, data=tidy, mean)
 
