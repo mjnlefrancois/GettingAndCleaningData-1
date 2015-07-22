@@ -1,4 +1,4 @@
-# GettingAndCleaningData
+# GettingAndCleaningData Readme
 
 ## Step 0: running the script and downloading the data set
 
