@@ -58,4 +58,4 @@ tidy$activity <- NULL
 
 # aggregate by subject and activity_name
 res <- aggregate(. ~ subject + activity_name, data=tidy, mean)
-
+write.table(res, 'tidy.txt', col.names=FALSE)
