@@ -9,9 +9,9 @@ read.uci <- function(type, fname) {
 	read.table(f)
 }
 
-# convenience function for reading feature label file
-read.labels <- function() {
-	f <- paste('.', subdir, 'features.txt', sep='/')
+# convenience function for reading feature or activity label file
+read.labels <- function(fname) {
+	f <- paste('.', subdir, fname, sep='/')
 	read.table(f)
 }
 
@@ -37,9 +37,15 @@ if (!(file.exists(subdir))) {
 data <- merge.uci('train')
 rbind(data, merge.uci('test'))
 
-# read feature labels 
-labels <- read.labels()
+# read feature labels
+features <- read.labels('features.txt')
 
-# only keep the variables / columns we're interested in
-keep <- labels[grep('mean|std', labels$V2),]
+# only keep the feature variables / columns we're interested in
+keep <- features[grep('mean|std', features$V2),]
 keep$V1 <- paste0('V', keep$V1)
+tidy <- data[, c(keep$V1, 'subject', 'activity')]
+
+# merge the tidy set with the activities table and only keep the names
+tidy <- merge(tidy, activities, by.x="activity", by.y="V1")
+tidy$activity <- NULL
+
