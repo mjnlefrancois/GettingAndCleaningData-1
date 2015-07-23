@@ -30,8 +30,12 @@ As mentioned above, the column names are labeled V1, V2... so:
 * Read the 'features.txt' file. This file contains the corresponding column names
 * Grep for column names containing 'std' or 'mean', and put those in a 'keep' list.
 * In the big 'data' set, remove all columns except the 'activity', 'subject' and the columns in the 'keep' list.
+* Save the result to a data set 'tidy'.
 
 ## Step 3: label data set with descriptive activity names
+
+* Read the 'activity_labels.txt'. This file contains the descriptive names for the activity columns.
+* Use the 'setnames' function to replace the activity numbers with the descriptive names.
 
 ## Step 4: label data set with descriptive feature names
 
