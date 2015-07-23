@@ -18,9 +18,18 @@ This step is fairly simple:
 
 * Using the 'cbind' function, the 'X_test.txt' (containing the measurements) will be extended with columns from the 'subject_test.txt' (subjects) and the 'y_test.txt' (activities)
 * The same approach is used for extending the 'X_train.txt' with 'subject_train.txt' and 'y_train.txt'.
-* Using the 'rbind' function, the rows of those two datasets will be combined into one big dataset. 
+* Using the 'rbind' function, the rows of those two datasets will be combined into one big dataset 'data'. 
+
+Note that the column names of the measurements are labeled V1, V2...
 
 ## Step 2: extracting mean and standard deviation measurements
+
+We're only interested in measurements about mean and deviation (std).
+As mentioned above, the column names are labeled V1, V2... so:
+
+* Read the 'features.txt' file. This file contains the corresponding column names
+* Grep for column names containing 'std' or 'mean', and put those in a 'keep' list.
+* In the big 'data' set, remove all columns except the 'activity', 'subject' and the columns in the 'keep' list.
 
 ## Step 3: label data set with descriptive activity names
 
