@@ -43,6 +43,9 @@ As mentioned above, the column names are labeled V1, V2... so:
 
 ## Step 4: label data set with descriptive feature names
 
+* Using the 'keep' list in step 2, look up the descriptive names for the features columns in the 'tidy' set (instead of the short label 'V1'...)
+* Rename the columns Using the 'setnames' function.
+
 ## Step 5: create data set with average for each activity and subject
 
 * Using the 'aggregate' function, calculate the mean for every measurement, aggregated by activity and subject. This is the end result.
