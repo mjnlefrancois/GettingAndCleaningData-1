@@ -47,6 +47,8 @@ tidy <- data[, c(keep$V1, 'subject', 'activity')]
 
 # rename the feature column names (look up values in 'keep')
 setnames(tidy, colnames(tidy), c(as.character(keep$V2), 'subject', 'activity'))
+setnames(tidy, sub('^f', 'Frequency', colnames(tidy)))
+setnames(tidy, sub('^t', 'Time', colnames(tidy)))
 
 # read activity labels
 activities <- read.labels('activity_labels.txt')
